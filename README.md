@@ -69,20 +69,11 @@ Override the command for one-off operations, for example:
 docker compose run --rm headscale-backup restic snapshots
 ```
 
-## Build and test
+## Build locally
 
 ```sh
-docker build -t restic-backup:test .
-docker run --rm --read-only --network none --cap-drop ALL \
-  --security-opt no-new-privileges \
-  --tmpfs /tmp:rw,nosuid,nodev,noexec,size=128m \
-  --volume "$PWD/tests:/tests:ro" \
-  restic-backup:test sh /tests/smoke.sh
+docker build -t restic-backup:local .
 ```
-
-The smoke test exercises a live SQLite WAL snapshot, an encrypted Restic backup
-and restore, and scheduled execution. CI runs it natively on both architectures,
-using the default UID and an application UID, before publishing.
 
 ## Releases
 
@@ -95,7 +86,7 @@ Commits select the version: breaking changes produce a major release, `feat`
 produces a minor release, and other changes produce a patch release. The first
 release is `1.0.0`. Release tooling runs only in GitHub Actions, never in the image.
 
-The publishing workflow builds and tests on native AMD64 and ARM64 runners,
+The publishing workflow builds on native AMD64 and ARM64 runners,
 pushes architecture-specific tags, then publishes the version and `latest`
 multi-architecture manifests. It adds the image reference to the GitHub release.
 If publishing fails after release creation, rerun the failed jobs for that run.

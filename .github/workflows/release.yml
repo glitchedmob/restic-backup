@@ -40,5 +40,4 @@ jobs:
     if: ${{ needs.release.outputs.new-release-published == 'true' }}
     uses: ./.github/workflows/docker-publish.yml
     with:
-      publish: true
       version: ${{ needs.release.outputs.release-version }}
