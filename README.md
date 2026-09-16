@@ -1,16 +1,22 @@
 # restic-backup
 
-Lightweight Alpine image with Restic, SQLite, Supercronic, jq, and CA certificates.
+The official Alpine-based Resticprofile image from GHCR, with SQLite added.
 
 ```sh
-docker pull ghcr.io/glitchedmob/restic-backup:1.0.0
+docker pull ghcr.io/glitchedmob/restic-backup:2.0.0
 ```
 
 ## Usage
 
-Mount your app's backup script and crontab under `/etc/backup`. The default command runs `supercronic /etc/backup/crontab` with schedules in UTC.
+Mount your Resticprofile configuration under `/resticprofile` and pass profile commands directly:
 
-The image runs as `65532:65532`. Override the user to match your app's data owner. Mount writable `/cache` and `/scratch` directories with matching ownership, and provide Restic credentials through your Compose configuration. No Docker socket is needed.
+```sh
+docker run --rm -v "$PWD:/resticprofile:ro" ghcr.io/glitchedmob/restic-backup:2.0.0 profiles
+```
+
+The image inherits the upstream `resticprofile` entrypoint and defaults to root. Set the user and writable cache, lock, and scratch paths in your Compose configuration. No Docker socket is needed.
+
+Version 2 replaces the Supercronic-based runtime from version 1. Existing deployments must update their configuration before switching.
 
 ## Build
 
