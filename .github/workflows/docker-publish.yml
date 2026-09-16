@@ -83,6 +83,7 @@ jobs:
           script: |
             const version = process.env.VERSION;
             const image = `ghcr.io/${context.repo.owner}/${context.repo.repo}`;
+            const packageUrl = `https://github.com/${context.repo.owner}/${context.repo.repo}/pkgs/container/${context.repo.repo}`;
             const { data: release } = await github.rest.repos.getReleaseByTag({
               owner: context.repo.owner,
               repo: context.repo.repo,
@@ -95,7 +96,7 @@ jobs:
               repo: context.repo.repo,
               release_id: release.id,
               body: `${body}\n\n${marker}\n## Container image\n\n` +
-                `Image: \`${image}:${version}\`\n\n` +
+                `Image: [\`${image}:${version}\`](${packageUrl})\n\n` +
                 `Platforms: \`linux/amd64\`, \`linux/arm64\`.\n\n` +
                 `Pull: \`docker pull ${image}:${version}\`\n\n` +
                 `The \`${image}:latest\` tag points to this release.`
