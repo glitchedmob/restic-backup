@@ -4,4 +4,4 @@ LABEL org.opencontainers.image.title="restic-backup" \
       org.opencontainers.image.description="Official Resticprofile image with SQLite backup tools" \
       org.opencontainers.image.source="https://github.com/glitchedmob/restic-backup"
 
-RUN apk add --no-cache sqlite
+RUN apk add --no-cache sqlite supercronic
