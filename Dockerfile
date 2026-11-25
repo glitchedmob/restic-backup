@@ -1,4 +1,4 @@
-FROM ghcr.io/creativeprojects/resticprofile:0.33.1@sha256:348075d8971af4884287b3fd719782015ad764423e0bddc4b93ae3a20eb8ca9f
+FROM ghcr.io/creativeprojects/resticprofile:0.35.0@sha256:e5e45b4994d09dd26e8fdb5be3d1c663dcaf282e2d8c758c422e67aaeafc855c
 
 LABEL org.opencontainers.image.title="restic-backup" \
       org.opencontainers.image.description="Official Resticprofile image with SQLite backup tools" \
